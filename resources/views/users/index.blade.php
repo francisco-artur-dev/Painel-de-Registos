@@ -4,26 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login do usuário</title>
+    <title>Listar</title>
 </head>
+
 <body>
 
     <a href="{{ route('users.create') }}">Cadastrar Usuário</a><br>
 
-    <h2> Login Do Usário
+    <h2>Lista de Usuários</h2>
 
-    <form action="{{ route('users.store') }}" method="post">
-        @csrf
-        @method('POST')
+    @if (session('success'))
+        <p style="color: #0f0;">
+            {{ session('success') }}
+        </p>
+    @endif
 
-        <label for="email">E-mail:</label>
-        <input type="email" name="email" placeholder="E-mail Do Usuário" required><br> <br>
+    @forelse ($usuarios as $user)
+        Id: {{ $user->id }} <br>
+        Nome: {{ $user->name }} <br>
+        Email: {{ $user->email }} <br>
 
-        <label for="password">Senha:</label>
-        <input type="password" name="password" placeholder="Senha com minimo de 6 caracteres" required> <br><br>
+        <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a> <br>
+        <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar </a> <br>
+       <!--<a href="{{ route('users.destroy', ['user' => $user->id]) }}">Deletar</a>-->
+        <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
+        </form>
+        <hr>
 
-        <button type="submit">Login</button>
-    
+    @empty
+        <p>Nenhum usuário encontrado.</p>
+    @endforelse
 
 </body>
 </html>
