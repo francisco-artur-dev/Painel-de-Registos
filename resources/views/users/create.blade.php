@@ -1,40 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CRUD</title>
-</head>
-<body>
-        <a href="{{ route('users.index') }}">Listar Usuários</a><br>
+@extends('layouts.admin')
 
-        <h2> Cadastrar Usuário </h2> <br>
-        
-        <!-- Verifica se há erros de validação -->
-        @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <p style="color: #f00;">
-                         {{ $error }}
-                    </p>
-                @endforeach
+@section('conteudo da página')
+    <div class="card mt-4 mb-4 border-light shadow">
 
-        @endif
+        <div class="card-header hstack gap-2">
+            <span> Cadastrar Usuário </span>
 
+            <span class="ms-auto">
+                <a href="{{ route('users.index') }}" class="btn btn-info btn-sm ">Listar Usuários</a>
+            </span>
+        </div>
+        <div class="card-body">
+            <x-alert />
 
-    <form action="{{ route('users.store') }}" method="post">
-        @csrf
+            <form action="{{ route('users.store') }}" class="row g-3" method="post" style="display:inline">
+                @csrf
 
-        <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Nome Completo"  value="{{old ('name')}}"> <br> <br>
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nome Do Usuário"  value="{{old ('name')}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail do Usuário" value="{{old ('email')}}">
+                </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="E-mail Do Usuário"  value="{{old ('email')}}"> <br><br>
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Senha com minimo de 6 caracteres" value="{{old ('password')}}">
+                </div>
 
-        <label for="password">Senha:</label>
-        <input type="password" name="password" placeholder="Senha com minimo de 6 caracteres"  value="{{old ('password')}}"><br> <br>
-
-        <button type="submit">Cadastrar</button>
-
-</body>
-</html>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success btn-sm">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection

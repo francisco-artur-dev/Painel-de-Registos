@@ -1,42 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar</title>
-</head>
+@extends('layouts.admin')
 
-<body>
+@section('conteudo da página')
 
-    <a href="{{ route('users.create') }}">Cadastrar Usuário</a><br>
+    <div class="card mt-4 mb-4 border-light shadow">
 
-    <h2>Lista de Usuários</h2>
+        <div class="card-header hstack gap-2">
 
-    @if (session('success'))
-        <p style="color: #0f0;">
-            {{ session('success') }}
-        </p>
-    @endif
+            <span>Lista de Usuários</span>
 
-    @forelse ($usuarios as $user)
-        Id: {{ $user->id }} <br>
-        Nome: {{ $user->name }} <br>
-        Email: {{ $user->email }} <br>
+            <span class="ms-auto">
+                <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Cadastrar Usuário</a>
+            </span>
+            
+        </div>
 
-        <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a> <br>
-        <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar </a> <br>
-       <!--<a href="{{ route('users.destroy', ['user' => $user->id]) }}">Deletar</a>-->
-        <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
-        </form>
-        <hr>
+        <div class="card-body">
+            <x-alert />
 
-    @empty
-        <p>Nenhum usuário encontrado.</p>
-    @endforelse
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col" class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-</body>
-</html>
+                    @forelse ($usuarios as $user)
+                        <tr>
+                            <th >{{ $user->id }} </th>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td  class="text-center">
+                                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
+                                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm ">Editar </a>
+                                <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                            <!--  botao deletar, funciona mas é má prática -->
+                       <!--<a href="{{ route('users.destroy', ['user' => $user->id]) }}">Deletar</a>-->
+
+
+                        @empty
+                           <p>Nenhum usuário encontrado.</p>
+
+                    @endforelse
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
+

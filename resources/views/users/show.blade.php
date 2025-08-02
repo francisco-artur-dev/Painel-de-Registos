@@ -1,36 +1,46 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Visualizar Usuários</title>
-</head>
-<body>
+@extends('layouts.admin')
 
-    <a href="{{ route('users.index') }}">Listar de usuários</a>
-    <br>
-    <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar Usuário</a>
-    <br>
-    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
-    </form>
+@section('conteudo da página')
+    <div class="card mt-4 mb-4 border-light shadow">
 
-    <h2>Visualizar Usuário</h2>
-        @if (session('success'))
-        <p style="color: #0f0;">
-            {{ session('success') }}
-        </p>
-    @endif
+        <div class="card-header hstack gap-2">
+           <span>Visualizar Usuário</span>
+                <span class="ms-auto d-sm-flex flex-row gap-2">
 
-        Id: {{ $user->id }} <br>
-        Nome: {{ $user->name }} <br>
-        Email: {{ $user->email }} <br>
-        DataCadastro: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }} <br>
-        DataAtualização: {{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }} <br>
-        <hr>
+                    <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">Listar </a>
+                    <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm">Editar </a>
+                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
+                    </form>
 
-</body>
-</html>
+                </span>
+       </div>
+
+        <div class="card-body">
+         <x-alert />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Data de cadastro</th>
+                        <th scope="col">Data de atualização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
+

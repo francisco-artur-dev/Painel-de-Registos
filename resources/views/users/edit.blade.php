@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html lang="PT">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar Usuário</title>
-</head>
-<body>
-    <a href="{{ route('users.index') }}">Listar de usuários</a> <br>
-    <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar Usuário</a>
+@extends('layouts.admin')
 
-    <h2>Editar Usuário</h2>
+@section('conteudo da página')
+    <div class="card mt-4 mb-4 border-light shadow">
+            <div class="card-header">
+                <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">Listar usuários</a>
+                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm">Visualizar Usuário</a>
+            </div>
+        </div>
 
-  @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <p style="color: #f00;">
-                         {{ $error }}
-                    </p>
-                @endforeach
+        <div class="card-body">
+            <h2 class="mb-4">Editar Usuário</h2>
+            <x-alert />
 
-        @endif
+            <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
+                @csrf
+                @method('PUT')
 
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nome Do Usuário"  value="{{old ('name', $user->name)}}">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail do Usuário" value="{{old ('email', $user->email)}}">
+                </div>
 
-    <form action="{{ route('users.update', ['user' => $user->id]) }}" method="post">
-        @csrf
-        @method('PUT')
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Senha:</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Senha com minimo de 6 caracteres" value="{{old ('password')}}">
+                </div>
 
-        <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Nome Completo"  value="{{old ('name', $user->name)}}"> <br> <br>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-warning  mt-2">Editar</button>
+                </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="E-mail Do Usuário"  value="{{old ('email', $user->email)}}"> <br><br>
+            </form>
+        </div>
+    </div>
 
-        <label for="password">Senha:</label>
-        <input type="password" name="password" placeholder="Senha com minimo de 6 caracteres"  value="{{old ('password')}}"><br> <br>
-
-        <button type="submit">Editar</button>
-
-</body>
-</html>
+@endsection

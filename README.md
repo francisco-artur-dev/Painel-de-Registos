@@ -1,66 +1,83 @@
-<<<<<<< HEAD
-# Crud-Laravel
-Um crud interativo com Laravel | PHP | HTML-CSS-JS-
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CRUD com Laravel 12 + Bootstrap 5
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este é um projeto de CRUD (Create, Read, Update, Delete) desenvolvido com **Laravel 12** e integração do **Bootstrap 5** via NPM utilizando o **Vite** como bundler de assets.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🧰 Tecnologias utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Laravel 12
+- PHP 8+
+- Bootstrap 5 (via NPM)
+- Vite (para assets)
+- Blade Templates
+- MySQL
+- Laravel Mix removido (uso exclusivo do Vite)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Listagem de usuários
+- Criação de novos usuários
+- Edição de usuários existentes
+- Exclusão com confirmação
+- Validação com mensagens de erro e flash alerts
+- Layouts e formulários responsivos com Bootstrap 5
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Instalação
 
-## Laravel Sponsors
+1. Clone o repositório:
+   git clone https://github.com/francisco-artur-dev/crud-laravel.git
+   cd seu-repositorio
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Instale as dependências do PHP:
+composer install
+Instale as dependências do Node:
+npm install
 
-### Premium Partners
+3. Copie o arquivo .env:
+cp .env.example .env
+4. Gere a key da aplicação:
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+5. Configure o banco de dados no arquivo .env.
 
-## Contributing
+6. Rode as migrations (e seeds, se tiver):
+php artisan migrate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+🧪 Executando o projeto
 
-## Code of Conduct
+1. Inicie o Vite (compilação dos assets):
+npm run dev
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Inicie o servidor Laravel:
+php artisan serve
+Acesse no navegador: http://localhost:8000
 
-## Security Vulnerabilities
+📁 Estrutura
+resources/views/layouts/admin.blade.php: layout base com Bootstrap e @vite
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+resources/views/users/: views do CRUD
+
+routes/web.php: rotas web
+
+app/Http/Controllers/UserController.php: lógica do CRUD
+
+public/build/: assets gerados pelo Vite
+
+✅ Requisitos
+PHP >= 8.1
+
+Composer
+
+Node.js e NPM
+
+Banco de dados compatível (MySQL, PostgreSQL, SQLite, Laragon, etc)
 
 ## License
-
+Este projeto está sob a licença MIT.
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> 912a08a (Primeiro commit do projeto CRUD em Laravel)
+
