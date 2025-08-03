@@ -9,7 +9,7 @@ Este é um projeto de CRUD (Create, Read, Update, Delete) desenvolvido com **Lar
 - Laravel 12
 - PHP 8+
 - Bootstrap 5 (via NPM)
-- Vite (para assets)
+- @Vite (para assets)
 - Blade Templates
 - MySQL
 - Laravel Mix removido (uso exclusivo do Vite)
