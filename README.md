@@ -30,7 +30,7 @@ Este é um projeto de CRUD (Create, Read, Update, Delete) desenvolvido com **Lar
 ## ⚙️ Instalação
 
 1. Clone o repositório:
-   git clone https://github.com/francisco-artur-dev/crud-laravel.git
+   git clone https://github.com/francisco-artur-dev/Painel-de-Registos.git
    cd seu-repositorio
 
 2. Instale as dependências do PHP:
