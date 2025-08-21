@@ -3,13 +3,13 @@ FROM php:8.2-apache
 
 # Instala dependências necessárias
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libpq-dev \
-    libzip-dev \
-    zip \
-    nodejs \
-    npm \
+    git\
+    unzip\
+    libpq-dev\
+    libzip-dev\
+    zip\
+    nodejs\
+    npm\
     && docker-php-ext-install pdo pdo_mysql zip
 
 # Habilita mod_rewrite do Apache
@@ -25,11 +25,11 @@ WORKDIR /var/www/html
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Instala dependências e compila assets
-RUN composer install --no-dev --optimize-autoloader \
-    && npm install \
-    && npm run build \
-    && php artisan config:cache \
-    && php artisan route:cache \
+RUN composer install --no-dev --optimize-autoloader\
+    && npm install\
+    && npm run build\
+    && php artisan config:cache\
+    && php artisan route:cache\
     && php artisan view:cache
 
 # Permissões para Laravel
