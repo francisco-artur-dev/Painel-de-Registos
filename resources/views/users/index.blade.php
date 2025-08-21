@@ -16,47 +16,43 @@
 
         <div class="card-body">
             <x-alert />
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @forelse ($usuarios as $user)
-                        <tr>
-                            <th >{{ $user->id }} </th>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td  class="text-center">
-                                <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
-                                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm ">Editar </a>
-                                <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Deletar</button>
-                                </form>
-                            </td>
-                        </tr>
-
-                            <!--  botao deletar, funciona mas é má prática -->
-                       <!--<a href="{{ route('users.destroy', ['user' => $user->id]) }}">Deletar</a>-->
-
-
-                        @empty
-                           <p>Nenhum usuário encontrado.</p>
-
-                    @endforelse
-
-                </tbody>
-            </table>
-        </div>
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($usuarios as $user)
+                <tr>
+                    <th>{{ $user->id }}</th>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td class="text-center">
+                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
+                            <a href="{{ route('users.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm">Visualizar</a>
+                            <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Nenhum usuário encontrado.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+                
     </div>
 @endsection
 
