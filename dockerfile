@@ -2,14 +2,14 @@
 FROM php:8.2-apache
 
 # Instala dependências necessárias
-RUN apt-get update && apt-get install -y \
-    git\
-    unzip\
-    libpq-dev\
-    libzip-dev\
-    zip\
-    nodejs\
-    npm\
+RUN apt-get update && apt-get install -y &&
+    git &&
+    unzip &&
+    libpq-dev &&
+    libzip-dev &&
+    zip &&
+    nodejs &&
+    npm &&
     && docker-php-ext-install pdo pdo_mysql zip
 
 # Habilita mod_rewrite do Apache
