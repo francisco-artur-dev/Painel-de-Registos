@@ -26,7 +26,6 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Instala dependências e compila assets
 RUN composer install --no-dev --optimize-autoloader && npm install && npm run build && php artisan config:cache && php artisan route:cache && php artisan view:cache
-
     
 
 # Permissões para Laravel
